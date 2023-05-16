@@ -54,6 +54,9 @@ function HomePage() {
       extraLandCharges:r.extraLandCharges
     }})
   };
+  if(loading){
+    return <h1 className="text-xl">Loading resources</h1>
+  }
   return (
     <Layout>
       <DeleteModal/>
