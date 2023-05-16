@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
-import DeleteModal from "../components/DeleteModal";
 import axios from "axios";
 import PreviewSidebar from "../components/PreviewSidebar";
 function HomePage() {
@@ -59,7 +58,6 @@ function HomePage() {
   }
   return (
     <Layout>
-      <DeleteModal/>
       <PreviewSidebar opened={previewOpened} setPreviewOpened={setPreviewOpened} record={previewRecord}/>
       <div className="my-12">
         <Table records={records} config={tableConfig} openPreview={openPreview}/>
