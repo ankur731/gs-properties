@@ -9,7 +9,7 @@ function HomePage() {
   const [previewOpened, setPreviewOpened] = useState(false);
   const [previewRecord, setPreviewRecord] = useState(null);
   const getAllData = async () => {
-    setLoading(true);
+    
     const url =
       "https://api.sheety.co/d896a1e2e8994f1f6d971c6d9abfeb9e/gsProperties/data";
     const config = {
@@ -22,7 +22,6 @@ function HomePage() {
       const response = await axios.get(url, config);
       const results = await response.data;
       setRecords(results.data);
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -36,9 +35,10 @@ function HomePage() {
   }
 
   useEffect(() => {
-    return async () => {
-      await getAllData();
-    };
+    setLoading(true);
+    getAllData();
+    console.log("Data loaded");
+    setLoading(false);
   }, []);
 
 

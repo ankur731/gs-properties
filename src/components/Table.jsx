@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 function Table({ config, openPreview }) {
-  const [skip, setSkip] = useState(10);
+  const skip = 10;
+  const rowsPerPage = 10;
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const [startIndex, setStartIndex] = useState((page - 1) * rowsPerPage);
 
   const { headers, data } = config;
