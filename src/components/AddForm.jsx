@@ -131,7 +131,7 @@ function AddForm() {
           <option  value={""}>
             Pick one
           </option>
-          {[1, 2, 3, 4].map((item, index) => {
+          {[1, 2, 3, 4,5,6,7,8].map((item, index) => {
             return <option key={index}>Phase {item}</option>;
           })}
         </select>
