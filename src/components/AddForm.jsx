@@ -21,10 +21,33 @@ const schema = Yup.object({
   extraLandCategory: Yup.string(),
 });
 
+const towns = [
+  {
+    id: 1,
+    town: "Bahria Town",
+    phases: [1, 2, 3, 4, 5, 6, 7, 8].map((i) => `Phase ${i}`),
+  },
+  {
+    id: 2,
+    town: "DHA",
+    phases: [1, 2, 3, 4, 5, 6].map((i) => `Phase ${i}`),
+  },
+  {
+    id: 1,
+    town: "Naval Anchorage",
+    phases: [],
+  },
+  {
+    id: 1,
+    town: "Gulberg",
+    phases: ["Greens", "Residentia"],
+  },
+];
+
 function AddForm() {
   const [showExtraLandFields, setShowExtraLandFields] = useState(false);
   const [inputSuccess, setInputSuccess] = useState(false);
-
+  const [townsOptions, setTownsOptions] = useState(towns.map((t) => t.town));
   const saveData = async (data) => {
     const url =
       "https://api.sheety.co/d896a1e2e8994f1f6d971c6d9abfeb9e/gsProperties/data";
@@ -97,49 +120,52 @@ function AddForm() {
           <span className="label-text">Town</span>
           <span className="label-text-alt">required</span>
         </label>
-        <input
-          type="text"
-          placeholder="Type here"
+        <select
           name="town"
           id="townField"
-          value={formik.values.town}
+          defaultValue={formik.values.town}
           onChange={formik.handleChange}
-          className={`input input-bordered w-full rounded-sm ${
+          className={`select select-bordered rounded-sm ${
             formik.touched.town && formik.errors.town && "input-error"
           }`}
-        />
+        >
+          <option value={""}>Pick one</option>
+          {townsOptions.map((item, index) => {
+            return <option key={index}>{item}</option>;
+          })}
+        </select>
 
         {formik.touched.town && formik.errors.town && (
           <p className="text-sm my-1 text-error">{formik.errors.town}</p>
         )}
       </div>
 
-      <div className="form-control w-full max-w-xl mb-3">
-        <label className="label">
-          <span className="label-text">Phase</span>
-          <span className="label-text-alt">required</span>
-        </label>
-        <select
-          name="phase"
-          id="phaseField"
-          defaultValue={formik.values.phase}
-          onChange={formik.handleChange}
-          className={`select select-bordered rounded-sm ${
-            formik.touched.phase && formik.errors.phase && "input-error"
-          }`}
-        >
-          <option  value={""}>
-            Pick one
-          </option>
-          {[1, 2, 3, 4,5,6,7,8].map((item, index) => {
-            return <option key={index}>Phase {item}</option>;
-          })}
-        </select>
+      {formik.values.town !== "Naval Anchorage" && (
+        <div className="form-control w-full max-w-xl mb-3">
+          <label className="label">
+            <span className="label-text">Phase</span>
+            <span className="label-text-alt">required</span>
+          </label>
+          <select
+            name="phase"
+            id="phaseField"
+            defaultValue={formik.values.phase}
+            onChange={formik.handleChange}
+            className={`select select-bordered rounded-sm ${
+              formik.touched.phase && formik.errors.phase && "input-error"
+            }`}
+          >
+            <option value={""}>Pick one</option>
+            {formik.values.town && towns.find(t=>t.town === formik?.values?.town).phases.map((item, index) => {
+              return <option key={index}>{item}</option>;
+            })}
+          </select>
 
-        {formik.touched.town && formik.errors.town && (
-          <p className="text-sm my-1 text-error">{formik.errors.phase}</p>
-        )}
-      </div>
+          {formik.touched.town && formik.errors.town && (
+            <p className="text-sm my-1 text-error">{formik.errors.phase}</p>
+          )}
+        </div>
+      )}
 
       <div className="form-control w-full max-w-xl mb-3">
         <label className="label">
@@ -267,9 +293,7 @@ function AddForm() {
               onChange={formik.handleChange}
               className={`select select-bordered rounded-sm`}
             >
-              <option value={""}>
-                Pick one
-              </option>
+              <option value={""}>Pick one</option>
               {["Paid", "Not Paid"].map((item, index) => {
                 return <option key={index}>{item}</option>;
               })}
