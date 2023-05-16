@@ -6,7 +6,7 @@ import axios from "axios";
 
 const schema = Yup.object({
   town: Yup.string().required("Town field is required"),
-  phase: Yup.string().required("Phase field is required"),
+  phase: Yup.string(),
   block: Yup.string().required("Block field is required"),
   plotNo: Yup.string().required("Plot no field is required"),
   street: Yup.string(),
@@ -49,13 +49,13 @@ function AddForm() {
   const formik = useFormik({
     initialValues: {
       town: "",
-      phase: "Phase 1",
+      phase: "",
       block: "",
       plotNo: "",
       street: "",
       demand: "",
       extraLandLabel: "",
-      extraLandCharges: "Paid",
+      extraLandCharges: "",
       extraLandCategory: "",
       extraLand: false,
       corner: false,
@@ -122,13 +122,13 @@ function AddForm() {
         <select
           name="phase"
           id="phaseField"
-          value={formik.values.phase}
+          defaultValue={formik.values.phase}
           onChange={formik.handleChange}
           className={`select select-bordered rounded-sm ${
             formik.touched.phase && formik.errors.phase && "input-error"
           }`}
         >
-          <option disabled defaultValue>
+          <option  value={""}>
             Pick one
           </option>
           {[1, 2, 3, 4].map((item, index) => {
@@ -263,11 +263,11 @@ function AddForm() {
             <select
               name="extraLandCharges"
               id="extraLandChargesField"
-              value={formik.values.extraLandCharges}
+              defaultValue={formik.values.extraLandCharges}
               onChange={formik.handleChange}
               className={`select select-bordered rounded-sm`}
             >
-              <option disabled defaultValue>
+              <option value={""}>
                 Pick one
               </option>
               {["Paid", "Not Paid"].map((item, index) => {
