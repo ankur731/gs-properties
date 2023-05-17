@@ -50,7 +50,7 @@ function AddForm() {
   const [townsOptions, setTownsOptions] = useState(towns.map((t) => t.town));
   const saveData = async (data) => {
     const url =
-      "https://api.sheety.co/d896a1e2e8994f1f6d971c6d9abfeb9e/gsProperties/data";
+      "https://api.sheety.co/d896a1e2e8994f1f6d971c6d9abfeb9e/propertyDatabase/data";
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -64,6 +64,7 @@ function AddForm() {
         { ...config }
       );
       const result = await response.data;
+      console.log(result);
       return result;
     } catch (error) {
       console.log(error);
@@ -107,8 +108,8 @@ function AddForm() {
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       {inputSuccess && (
-        <div class="toast toast-top toast-end">
-          <div class="alert alert-success">
+        <div className="toast toast-top toast-end">
+          <div className="alert alert-success">
             <div>
               <span>New Record added successfully</span>
             </div>

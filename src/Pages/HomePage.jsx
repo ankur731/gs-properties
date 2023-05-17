@@ -11,7 +11,7 @@ function HomePage() {
   const getAllData = async () => {
     
     const url =
-      "https://api.sheety.co/d896a1e2e8994f1f6d971c6d9abfeb9e/gsProperties/data";
+      "https://api.sheety.co/d896a1e2e8994f1f6d971c6d9abfeb9e/propertyDatabase/data";
     const config = {
       headers: {
         "Content-Type": "application/json",
