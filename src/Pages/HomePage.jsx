@@ -11,7 +11,7 @@ function HomePage() {
   const getAllData = async () => {
     
     const url =
-      "https://api.sheety.co/d896a1e2e8994f1f6d971c6d9abfeb9e/propertyDatabase/data";
+      "https://api.sheety.co/dce9e5a099cfe54a39166e86dab85f40/property/data";
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ function HomePage() {
       const results = await response.data;
       setRecords(results.data);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 

@@ -50,7 +50,7 @@ function AddForm() {
   const [townsOptions, setTownsOptions] = useState(towns.map((t) => t.town));
   const saveData = async (data) => {
     const url =
-      "https://api.sheety.co/d896a1e2e8994f1f6d971c6d9abfeb9e/propertyDatabase/data";
+      "https://api.sheety.co/dce9e5a099cfe54a39166e86dab85f40/property/data";
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ function AddForm() {
       console.log(result);
       return result;
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
   const formik = useFormik({
